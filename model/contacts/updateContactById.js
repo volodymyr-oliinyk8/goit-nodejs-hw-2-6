@@ -7,10 +7,9 @@ async function updateContactById(contactId, data) {
   if (idx === -1) {
     return null;
   }
-  contacts[idx] = { ...data, contactId };
-  console.log(contacts);
+  const id = Number(contactId);
+  contacts[idx] = { id, ...data };
   await updateContactsList(contacts);
-  console.log(contacts[idx]);
   return contacts[idx];
 }
 

@@ -7,6 +7,7 @@ async function addContact({ name, email, phone }) {
   const sortId = allContactsId.sort((a, b) => a - b);
   const maxId = sortId[sortId.length - 1];
   const newId = maxId + 1;
+  console.log(newId);
   const newContact = {
     id: newId,
     name,
