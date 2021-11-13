@@ -1,13 +1,12 @@
 const { BadRequest } = require("http-errors");
 
-const contactValidation = (schema) => {
+const contactValidationFavorite = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      throw new BadRequest("missing required name field");
+      throw new BadRequest("missing field favorite");
     }
     next();
   };
 };
-
-module.exports = contactValidation;
+module.exports = contactValidationFavorite;
