@@ -6,6 +6,7 @@ const {
   contactValidation,
   contactValidationFavorite,
   controllerWrapper,
+  authenticate,
 } = require("../../midlewares/validation");
 
 const router = express.Router();
@@ -14,7 +15,12 @@ router.get("/", controllerWrapper(ctrl.getAll));
 
 router.get("/:contactId", controllerWrapper(ctrl.getById));
 
-router.post("/", contactValidation(JoiSchema), controllerWrapper(ctrl.add));
+router.post(
+  "/",
+  authenticate,
+  contactValidation(JoiSchema),
+  controllerWrapper(ctrl.add)
+);
 
 router.delete("/:contactId", controllerWrapper(ctrl.removeById));
 
