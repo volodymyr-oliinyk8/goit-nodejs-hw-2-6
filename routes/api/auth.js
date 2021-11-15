@@ -5,9 +5,10 @@ const {
   contactValidation,
   controllerWrapper,
   authenticate,
+  userValidationSubscription,
 } = require("../../midlewares/validation");
 
-const { userJoiSchema } = require("../../model/user");
+const { userJoiSchema, JoiSchemaSubscription } = require("../../model/user");
 
 const ctrl = require("../../controlles/auth");
 
@@ -23,5 +24,11 @@ router.post(
 );
 router.post("/logout", authenticate, controllerWrapper(ctrl.logout));
 router.get("/current", authenticate, controllerWrapper(ctrl.current));
+router.patch(
+  "/",
+  authenticate,
+  userValidationSubscription(JoiSchemaSubscription),
+  controllerWrapper(ctrl.updateSubscription)
+);
 
 module.exports = router;
