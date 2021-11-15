@@ -3,8 +3,8 @@ const express = require("express");
 const router = express.Router();
 const {
   contactValidation,
-  //   contactValidationFavorite,
   controllerWrapper,
+  authenticate,
 } = require("../../midlewares/validation");
 
 const { userJoiSchema } = require("../../model/user");
@@ -21,7 +21,7 @@ router.post(
   contactValidation(userJoiSchema),
   controllerWrapper(ctrl.login)
 );
-router.post("/logout", controllerWrapper(ctrl.logout));
-router.get("/current", controllerWrapper(ctrl.current));
+router.post("/logout", authenticate, controllerWrapper(ctrl.logout));
+router.get("/current", authenticate, controllerWrapper(ctrl.current));
 
 module.exports = router;
