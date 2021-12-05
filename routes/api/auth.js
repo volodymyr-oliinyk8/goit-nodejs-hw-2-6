@@ -6,10 +6,15 @@ const {
   controllerWrapper,
   authenticate,
   userValidationSubscription,
+  userValidationEmail,
   uploadAvatars,
 } = require("../../midlewares/validation");
 
-const { userJoiSchema, JoiSchemaSubscription } = require("../../model/user");
+const {
+  userJoiSchema,
+  JoiSchemaSubscription,
+  JoiSchemaEmail,
+} = require("../../model/user");
 
 const ctrl = require("../../controlles/auth");
 
@@ -36,6 +41,12 @@ router.patch(
   authenticate,
   uploadAvatars.single("avatar"),
   controllerWrapper(ctrl.updateAvatars)
+);
+router.get("/verify/:verificationToken", controllerWrapper(ctrl.verify));
+router.post(
+  "/verify",
+  userValidationEmail(JoiSchemaEmail),
+  controllerWrapper(ctrl.repeatVerifyMail)
 );
 
 module.exports = router;

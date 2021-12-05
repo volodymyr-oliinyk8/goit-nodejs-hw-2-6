@@ -4,6 +4,7 @@ const controllerWrapper = require("./controllerWrapper");
 const authenticate = require("./authenticate");
 const userValidationSubscription = require("./userValidationSubscription");
 const uploadAvatars = require("./uploadAvatars");
+const userValidationEmail = require("./userValidationEmail");
 
 module.exports = {
   contactValidation,
@@ -12,4 +13,5 @@ module.exports = {
   authenticate,
   userValidationSubscription,
   uploadAvatars,
+  userValidationEmail,
 };
